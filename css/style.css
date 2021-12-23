@@ -11,33 +11,87 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    padding: 40px 100px;
+}
+
+/* Partie header */
+.logo {
+    height: 50px;
 }
 
 h1 {
     color: #901C1C;
-    margin-right: 100px;
+    margin: 0;
 }
 
-.logo {
-    height: 50px;
-    margin-left: 100px;
-}
-
+/* Partie index */
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin: 60px 0 100px;
 }
 
-.photographer_section article {
+.thumb-photographer{
     justify-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.user h2 {
+    margin: 20px 0 0;
+    color: #D3573C;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 47px;
+}
+
+.user img {
+    height: 200px;
+    width: 200px;
+    background: #C4C4C4;
+    border-radius: 50%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.location, .tag, .dailyPrice{
+    margin: 0 0 3px;
+}
+
+.location {
+    color: #901C1C;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.tag{
+    font-size: 10px;
+    line-height: 13px;
+}
+
+.dailyPrice{
+    color: #757575;
+    font-size: 9px;
+    line-height: 12px;
+}
+
+/* 
+.photographer_section article {
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} 
 
 .photographer_section article h2 {
     color: #D3573C;
@@ -47,4 +101,4 @@ h1 {
 .photographer_section article img {
     height: 200px;
     width: 200px;
-}
+} */
