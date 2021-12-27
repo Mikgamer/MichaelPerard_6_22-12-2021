@@ -1,38 +1,32 @@
 function photographerFactory(data) {
-    const { name, id, city, country, tagline, price, portrait} = data;
 
+    const { name, id, city, country, tagline, price, portrait } = data;
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
         article.className = 'thumb-photographer';
 
-        const user = document.createElement( 'a' );
-        user.href = `photographer-${id}`;
-        user.className = 'user';
+        const linkUser = document.createElement( 'a' );
+        linkUser.href = `/photographer.html?photographer=${id}`;
 
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", `Image du photographe ${name}`);
+        const img = getUserPictureDOM();
 
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
 
         const location = document.createElement( 'p' );
         location.textContent = `${city}, ${country}`;
-        location.className = 'location';
 
         const tag = document.createElement( 'p' );
         tag.textContent = tagline;
-        tag.className = 'tag';
 
         const dailyPrice = document.createElement( 'p' );
         dailyPrice.textContent = `${price}€/jour`;
-        dailyPrice.className = 'dailyPrice';
 
-        user.appendChild(img);
-        user.appendChild(h2);
-        article.appendChild(user);
+        linkUser.appendChild(img);
+        linkUser.appendChild(h2);
+        article.appendChild(linkUser);
 
         article.appendChild(location);
         article.appendChild(tag);
@@ -40,5 +34,35 @@ function photographerFactory(data) {
 
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+
+    function getUserProfileDOM() {
+        const div = document.createElement( 'div' );
+        div.className = 'photographer-profile';
+
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = name;
+
+        const location = document.createElement( 'p' );
+        location.textContent = `${city}, ${country}`;
+
+        const tag = document.createElement( 'p' );
+        tag.textContent = tagline;
+
+        div.appendChild(h2);
+        div.appendChild(location);
+        div.appendChild(tag);
+
+        return (div);
+    }
+
+    function getUserPictureDOM() {
+        const img = document.createElement( 'img' );
+        img.setAttribute("src", picture);
+        img.setAttribute("alt", `Image du photographe ${name}`);
+        img.className = 'user';
+        
+        return (img);
+    }
+    
+    return { getUserCardDOM, getUserProfileDOM, getUserPictureDOM }
 }

@@ -3,9 +3,37 @@
 }
 
 .photograph-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    margin: 0 100px 20px;
+}
+
+.photographer-profile h2{
+    margin: 0;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 83px;
+    color: #D3573C;
+}
+
+.photographer-profile p{
+    margin: 0 0 19px;
+}
+
+.photographer-profile p:nth-of-type(1){
+    font-size: 24px;
+    line-height: 31px;
+    color: #901C1C;
+}
+
+.photographer-profile p:nth-of-type(2){
+    font-size: 18px;
+    line-height: 23px;
+    color: #525252;
 }
 
 .contact_button {
@@ -19,6 +47,58 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+label[for="orderBy"]{
+    margin-left: 100px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.dropdown{
+    width: 170px;
+    padding: 20px;
+    background: #911C1C;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 23px;
+    color: #FFFFFF;
+    appearance: none;
+}
+
+
+.dropdown-open{
+    border-radius: 5px 5px 0 0;
+}
+
+.dropdown-open+.arrow{
+    transform: rotate(180deg);
+}
+
+.arrow{
+    position: relative;
+    left: -36px;
+    line-height: 23px;
+    object-fit: cover;
+    width: 16px;
+    height: 10px;
+}
+
+.photograph-work{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 300px;
+    justify-content: space-between;
+    gap: 95px;
+    padding: 0 100px;
+}
+
+.thumb-imgfull > img{
+    object-fit: cover;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
 }
 
 .modal {
