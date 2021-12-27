@@ -13,6 +13,7 @@ function photographerWorkFactory(data) {
         img.className = 'thumb-img ';
 
         const text = document.createElement( 'p' );
+        text.textContent = title;
 
         const divLikes = document.createElement( 'div' );
         divLikes.className = 'likes';
@@ -21,6 +22,8 @@ function photographerWorkFactory(data) {
         numberLikes.className = 'number-likes';
         numberLikes.textContent = likes;
         const imgLikes = document.createElement( 'img' );
+        imgLikes.setAttribute("src", 'assets/icons/heart.svg');
+        imgLikes.setAttribute("alt", `likes`);
 
         divLikes.appendChild(numberLikes);
         divLikes.appendChild(imgLikes);

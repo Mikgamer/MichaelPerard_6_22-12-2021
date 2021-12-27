@@ -4,20 +4,22 @@ async function getPhotographers() {
         .then(response => response.json());
 }
 
-async function displayProfileData(photographers) {
+async function displayPhotographerData(photographer) {
     const photographersHeader = document.querySelector(".photograph-header");
     const contactButton = document.querySelector(".contact_button");
+    const pricePerDay = document.querySelector(".pricePerDay");
 
-    // Trouve le photographe en fonction du paramètre de la page
-    const photographer = photographers.find( photographe => photographe.id == getPhotographerId() )
 
     const photographerModel = photographerFactory(photographer);
-    const getUserProfile = photographerModel.getUserProfileDOM();
-    const getUserPicture = photographerModel.getUserPictureDOM();
+    const userProfile = photographerModel.getUserProfileDOM();
+    const userPicture = photographerModel.getUserPictureDOM();
+    const userPrice = document.createTextNode(photographerModel.price);
 
-    photographersHeader.insertBefore(getUserProfile,contactButton);
-    photographersHeader.appendChild(getUserPicture);
-};
+    photographersHeader.insertBefore(userProfile,photographersHeader.firstChild);
+    photographersHeader.appendChild(userPicture);
+
+    pricePerDay.insertBefore(userPrice, pricePerDay.firstChild);
+}
 
 async function displayWorkData(media) {
     const photographerWork = document.querySelector(".photograph-work");
@@ -37,12 +39,28 @@ function getPhotographerId() {
     return params.photographer;
 }
 
+async function updateTotalLikes() {
+    const pictures = document.querySelector(".photograph-work");
+    const likes = pictures.querySelectorAll(".number-likes");
+    const spanTotalLikes = document.querySelector(".totalLikes");
+
+    var totalLikes = 0;
+    likes.forEach( like => totalLikes += parseInt(like.textContent) )
+    const likesNode = document.createTextNode(totalLikes);
+    
+    spanTotalLikes.insertBefore(likesNode, spanTotalLikes.firstChild);
+}
+
 async function init() {
     // Récupère les données des photographes pour ensuite les insérer dans index.html
     const { photographers, media } = await getPhotographers();
-    
-    displayProfileData(photographers);
+
+    // Trouve le photographe en fonction du paramètre de la page
+    const photographer = photographers.find( photographe => photographe.id == getPhotographerId() )
+
+    displayPhotographerData(photographer);
     displayWorkData(media);
+    updateTotalLikes();
 };
     
 init();

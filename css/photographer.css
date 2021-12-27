@@ -91,7 +91,13 @@ label[for="orderBy"]{
     grid-auto-rows: 300px;
     justify-content: space-between;
     gap: 95px;
-    padding: 0 100px;
+    margin: 30px 100px;
+}
+
+.thumb-imgfull {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .thumb-imgfull > img{
@@ -99,6 +105,53 @@ label[for="orderBy"]{
     border-radius: 5px;
     width: 100%;
     height: 100%;
+}
+
+.thumb-imgfull p{
+    margin: 10px 0 0;
+    font-size: 24px;
+    line-height: 31px;
+    color: #911C1C;
+}
+
+.likes{
+    margin: 10px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.likes img {
+    height: 18px;
+    width: 18px;
+    object-fit: contain;
+}
+
+.number-likes{
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+    margin-right: 6px;
+    color: #911C1C;
+}
+
+.likesAndPrice{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    right: 36px;
+    bottom: 0;
+    height: 68px;
+    padding: 0 30px;
+    background: #DB8876;
+    border-radius: 5px 5px 0 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+}
+
+.totalLikes img{
+    filter: brightness(0);
 }
 
 .modal {
