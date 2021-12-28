@@ -21,17 +21,23 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
       
-      <label for="orderBy">Trier par</label>
-      <select class="dropdown" id="orderBy">
-        <option value="popularity">Popularité</option>
-        <option value="date">Date</option>
-        <option value="title">Titre</option>
-      </select><img src="assets/icons/arrow.svg" alt="" class="arrow">
+      <label class="dropdown-label">Trier par</label>
+      <div data-value="popularity" class="dropdown">
+        <span onclick="dropdown(event)">Popularité</span> <img src="assets/icons/arrow.svg" alt="" class="arrow">
+        <ul class="dropdown-options">
+          <li onclick="dropdownOption(event)" class="dropdown-hide" data-value="popularity">Popularité</li>
+          <li onclick="dropdownOption(event)" data-value="date">Date</li>
+          <li onclick="dropdownOption(event)" data-value="title">Titre</li>
+        </ul>
+      </div>
 
       <section class="photograph-work"></section>
 
       <div class="likesAndPrice">
-        <span class="totalLikes"> <img src="assets/icons/heart.svg" alt="likes"></span>
+        <span class="totalLikes">
+          <span class="totalLikesNumber"></span>
+          <img src="assets/icons/heart.svg" alt="likes">
+        </span>
         <span class="pricePerDay">€ / Jour</span>
       </div>
     </main>
