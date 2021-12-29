@@ -14,6 +14,7 @@ function photographerWorkFactory(data) {
             media = document.createElement( 'img' );
             media.setAttribute("src", picture);
             media.setAttribute("alt", `${title}`);
+            media.setAttribute("loading", "lazy");
             media.dataset.date = date;
             media.className = 'thumb-img';
         } else if( video != undefined ) {

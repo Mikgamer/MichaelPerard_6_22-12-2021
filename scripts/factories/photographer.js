@@ -59,6 +59,7 @@ function photographerFactory(data) {
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
         img.setAttribute("alt", `Image du photographe ${name}`);
+        img.setAttribute("loading", "lazy");
         img.className = 'user';
         
         return (img);
