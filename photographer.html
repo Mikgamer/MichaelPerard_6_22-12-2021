@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
@@ -54,15 +53,22 @@
     <div id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi</h2>
+          <h1>Contactez-moi</h1>
           <img src="assets/icons/close.svg" onclick="closeModal()" alt=""/>
+          <h2></h2>
         </header>
-				<form>
+				<form onsubmit="return sendForm(event)">
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="firstName">Prénom</label>
+						<input type="text" name="firstName" id="firstName"/>
+						<label for="lastName">Nom</label>
+						<input type="text" name="lastName" id="lastName"/>
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email"/>
+						<label for="yourMessage">Votre message</label>
+						<textarea name="yourMessage" id="yourMessage"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" type="submit">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -70,6 +76,7 @@
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/PhotographerWork.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
     <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>

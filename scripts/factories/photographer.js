@@ -39,16 +39,16 @@ function photographerFactory(data) {
         const div = document.createElement( 'div' );
         div.className = 'photographer-profile';
 
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
+        const h1 = document.createElement( 'h1' );
+        h1.textContent = name;
 
-        const location = document.createElement( 'p' );
+        const location = document.createElement( 'h2' );
         location.textContent = `${city}, ${country}`;
 
         const tag = document.createElement( 'p' );
         tag.textContent = tagline;
 
-        div.appendChild(h2);
+        div.appendChild(h1);
         div.appendChild(location);
         div.appendChild(tag);
 

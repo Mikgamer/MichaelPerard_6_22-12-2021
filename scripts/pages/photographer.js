@@ -40,6 +40,16 @@ function getPhotographerId() {
     return params.photographer;
 }
 
+function like(event) {
+    const target = event.currentTarget;
+
+    if ( !target.hasAttribute('liked') ) {
+        target.setAttribute('liked','');
+        target.querySelector(".number-likes").textContent = parseInt(target.textContent)+1;
+        updateTotalLikes();
+    }
+}
+
 async function updateTotalLikes() {
     const pictures = document.querySelector(".photograph-work");
     const likes = pictures.querySelectorAll(".number-likes");
@@ -49,17 +59,6 @@ async function updateTotalLikes() {
     likes.forEach( like => totalLikes += parseInt(like.textContent) )
 
     totalLikesNumber.textContent = totalLikes;
-}
-
-function like(event) {
-    const target = event.currentTarget;
-
-    if ( !target.hasAttribute('liked') ) {
-        console.log("ok");
-        target.setAttribute('liked','');
-        target.querySelector(".number-likes").textContent = parseInt(target.textContent)+1;
-        updateTotalLikes();
-    }
 }
 
 function dropdown(event) {
@@ -132,90 +131,15 @@ function orderWork() {
     content.forEach(item => photographWork.appendChild(item));
 }
 
-function lightbox(event) {
-    const target = event.currentTarget;
-    const work = target.parentNode;
-    const lightbox = document.querySelector(".lightbox");
-    const worksNodes = document.querySelectorAll(".photograph-work>article");
-    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
-    let works = Array.prototype.slice.call(worksNodes);
-    const indexWork = works.indexOf(work);
-
-    lightbox.dataset.key = indexWork;
-
-    loadLightbox();
-    
-    lightbox.classList.toggle('lightbox-show');
-}
-
-function loadLightbox() {
-    const lightbox = document.querySelector(".lightbox");
-    const lightboxText = lightbox.querySelector("p");
-    const worksNodes = document.querySelectorAll(".photograph-work>article");
-    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
-    let works = Array.prototype.slice.call(worksNodes);
-    const currentWorkKey = lightbox.dataset.key;
-    const currentText = works[currentWorkKey].querySelector("p").textContent;
-    const currentWork = works[currentWorkKey].querySelector(".thumb-img").cloneNode(true);
-
-    if (currentWorkKey < 1) {
-        lightbox.querySelector(".previous").setAttribute("disabled","")
-    } else if (currentWorkKey > works.length - 2) {
-        lightbox.querySelector(".next").setAttribute("disabled","")
-    } else {
-        lightbox.querySelector(".previous").removeAttribute("disabled")
-        lightbox.querySelector(".next").removeAttribute("disabled")
-    }
-
-    if (lightbox.querySelector(".thumb-img") != undefined) {
-        lightbox.querySelector(".thumb-img").outerHTML = "";
-    }
-
-    lightbox.insertBefore(currentWork, lightboxText);
-    lightbox.querySelector(".thumb-img").removeAttribute("onclick");
-    lightboxText.textContent = currentText;
-}
-
-function lightboxControl(event) {
-    const target = event.currentTarget;
-    const lightbox = document.querySelector(".lightbox");
-    const worksNodes = document.querySelectorAll(".photograph-work>article");
-    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
-    let works = Array.prototype.slice.call(worksNodes);
-    let lightboxKey = parseInt(lightbox.dataset.key);
-    let needLoad = false;
-
-    switch (target.className) {
-        case "next":
-            if (lightboxKey < works.length - 1) {
-                lightboxKey += 1;
-                needLoad = true;
-            }
-            break;
-        case "previous":
-            if (lightboxKey > 0) {
-                lightboxKey -= 1;
-                needLoad = true;
-            }
-            break;
-        case "close":
-            lightbox.classList.toggle('lightbox-show');
-            break;
-    
-        default:
-            break;
-    }
-
-    lightbox.dataset.key = lightboxKey;
-    needLoad ? loadLightbox() : undefined;
-}
-
 async function init() {
     // Récupère les données des photographes avant de charger le reste des fonctions
     const { photographers, media } = await getPhotographers();
 
     // Trouve le photographe en fonction du paramètre de la page
-    const photographer = photographers.find( photographe => photographe.id == getPhotographerId() )
+    const photographer = photographers.find( photographe => photographe.id == getPhotographerId() );
+
+    // Affiche le nom du photographe dans la page contact
+    document.querySelector(".modal header>h2:last-of-type").textContent = photographer.name;
 
     displayPhotographerData(photographer);
     displayWorkData(media);

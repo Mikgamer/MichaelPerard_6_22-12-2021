@@ -32,7 +32,7 @@ function photographerWorkFactory(data) {
         
         var media = getMediaDOM();
 
-        const text = document.createElement( 'p' );
+        const text = document.createElement( 'h2' );
         text.textContent = title;
 
         const divLikes = document.createElement( 'div' );
