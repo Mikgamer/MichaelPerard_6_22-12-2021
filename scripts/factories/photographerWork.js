@@ -4,10 +4,7 @@ function photographerWorkFactory(data) {
     const picture = `assets/images/${image}`;
     const videoMedia = `assets/images/${video}`;
 
-    function getUserWorkDOM() {
-        const article = document.createElement( 'article' );
-        article.className = 'thumb-imgfull';
-        
+    function getMediaDOM() {
         var media = "";
 
         if( image != undefined ) {
@@ -15,14 +12,25 @@ function photographerWorkFactory(data) {
             media.setAttribute("src", picture);
             media.setAttribute("alt", `${title}`);
             media.setAttribute("loading", "lazy");
+            media.setAttribute("onclick", "lightbox(event)");
             media.dataset.date = date;
             media.className = 'thumb-img';
         } else if( video != undefined ) {
             media = document.createElement( 'video' );
             media.className = 'thumb-img';
             media.setAttribute("src", videoMedia);
+            media.setAttribute("onclick", "lightbox(event)");
             media.dataset.date = date;
         }
+
+        return media
+    }
+
+    function getUserWorkDOM() {
+        const article = document.createElement( 'article' );
+        article.className = 'thumb-imgfull';
+        
+        var media = getMediaDOM();
 
         const text = document.createElement( 'p' );
         text.textContent = title;

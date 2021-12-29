@@ -25,9 +25,9 @@
       <div data-value="popularity" class="dropdown">
         <span onclick="dropdown(event)">Popularité</span> <img src="assets/icons/arrow.svg" alt="" class="arrow">
         <ul class="dropdown-options">
-          <li onclick="dropdownOption(event)" class="dropdown-hide" data-value="popularity">Popularité</li>
-          <li onclick="dropdownOption(event)" data-value="date">Date</li>
-          <li onclick="dropdownOption(event)" data-value="title">Titre</li>
+          <li onclick="selectDropdownOption(event)" class="dropdown-hide" data-value="popularity">Popularité</li>
+          <li onclick="selectDropdownOption(event)" data-value="date">Date</li>
+          <li onclick="selectDropdownOption(event)" data-value="title">Titre</li>
         </ul>
       </div>
 
@@ -41,6 +41,15 @@
         <span class="pricePerDay">€ / Jour</span>
       </div>
     </main>
+
+    <div class="lightbox">
+      <p></p>
+      <nav>
+        <img src="assets/icons/lightboxArrow.svg" onclick="lightboxControl(event)" alt="" class="previous">
+        <img src="assets/icons/lightboxArrow.svg" onclick="lightboxControl(event)" alt="" class="next">
+        <img src="assets/icons/lightboxClose.svg" onclick="lightboxControl(event)" alt="" class="close">
+      </nav>
+    </div>
 
     <div id="contact_modal">
 			<div class="modal">

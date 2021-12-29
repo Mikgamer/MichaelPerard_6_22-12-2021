@@ -1,5 +1,4 @@
 async function getPhotographers() {
-    // Récupère les données des photographes depuis le fichier JSON
     return fetch('data/photographers.json')
         .then(response => response.json());
 }
@@ -23,38 +22,35 @@ async function displayPhotographerData(photographer) {
 }
 
 // Affiche les images et vidéos du photographe
-async function displayWorkData(media) {
+async function displayWorkData(medias) {
     const photographerWork = document.querySelector(".photograph-work");
     
-    const pictures = media.filter( picture => picture.photographerId == getPhotographerId() )
+    const works = medias.filter( media => media.photographerId == getPhotographerId() )
 
-    pictures.forEach((picture) => {
-        const photographerWorkModel = photographerWorkFactory(picture);
+    works.forEach((media) => {
+        const photographerWorkModel = photographerWorkFactory(media);
         const userWorkDOM = photographerWorkModel.getUserWorkDOM();
         photographerWork.appendChild(userWorkDOM);
     });
 }
 
-// Récupère l'id du photographe depuis la querry url pour afficher son contenu
 function getPhotographerId() {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
     return params.photographer;
 }
 
-// Recharge le nombre total de likes
 async function updateTotalLikes() {
     const pictures = document.querySelector(".photograph-work");
     const likes = pictures.querySelectorAll(".number-likes");
     const totalLikesNumber = document.querySelector(".totalLikesNumber");
 
-    var totalLikes = 0;
+    let totalLikes = 0;
     likes.forEach( like => totalLikes += parseInt(like.textContent) )
 
     totalLikesNumber.textContent = totalLikes;
 }
 
-// Fonction ajout like
 function like(event) {
     const target = event.currentTarget;
 
@@ -71,12 +67,12 @@ function dropdown(event) {
     dropdown.classList.toggle('dropdown-open');
 }
 
-function dropdownOption(event) {
+function selectDropdownOption(event) {
     const target = event.currentTarget;
 
     const option = target.dataset.value;
     const dropdown = target.parentNode.parentNode;
-    var optionsHidden = dropdown.getElementsByClassName("dropdown-hide")
+    let optionsHidden = dropdown.getElementsByClassName("dropdown-hide")
 
     for (let i = 0; i < optionsHidden.length; i++) {
         optionsHidden[i].classList.remove("dropdown-hide");
@@ -90,13 +86,12 @@ function dropdownOption(event) {
     orderWork();
 }
 
-// Ordone les images et vidéos du photographe
 function orderWork() {
     const photographWork = document.querySelector(".photograph-work");
-    var contentNodes = document.querySelectorAll('.thumb-imgfull');
+    let contentNodes = document.querySelectorAll('.thumb-imgfull');
     const order = document.querySelector(".dropdown").dataset.value;
     // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
-    var content = Array.prototype.slice.call(contentNodes);
+    let content = Array.prototype.slice.call(contentNodes);
     
     switch (order) {
         case "popularity":
@@ -137,8 +132,86 @@ function orderWork() {
     content.forEach(item => photographWork.appendChild(item));
 }
 
+function lightbox(event) {
+    const target = event.currentTarget;
+    const work = target.parentNode;
+    const lightbox = document.querySelector(".lightbox");
+    const worksNodes = document.querySelectorAll(".photograph-work>article");
+    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
+    let works = Array.prototype.slice.call(worksNodes);
+    const indexWork = works.indexOf(work);
+
+    lightbox.dataset.key = indexWork;
+
+    loadLightbox();
+    
+    lightbox.classList.toggle('lightbox-show');
+}
+
+function loadLightbox() {
+    const lightbox = document.querySelector(".lightbox");
+    const lightboxText = lightbox.querySelector("p");
+    const worksNodes = document.querySelectorAll(".photograph-work>article");
+    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
+    let works = Array.prototype.slice.call(worksNodes);
+    const currentWorkKey = lightbox.dataset.key;
+    const currentText = works[currentWorkKey].querySelector("p").textContent;
+    const currentWork = works[currentWorkKey].querySelector(".thumb-img").cloneNode(true);
+
+    if (currentWorkKey < 1) {
+        lightbox.querySelector(".previous").setAttribute("disabled","")
+    } else if (currentWorkKey > works.length - 2) {
+        lightbox.querySelector(".next").setAttribute("disabled","")
+    } else {
+        lightbox.querySelector(".previous").removeAttribute("disabled")
+        lightbox.querySelector(".next").removeAttribute("disabled")
+    }
+
+    if (lightbox.querySelector(".thumb-img") != undefined) {
+        lightbox.querySelector(".thumb-img").outerHTML = "";
+    }
+
+    lightbox.insertBefore(currentWork, lightboxText);
+    lightbox.querySelector(".thumb-img").removeAttribute("onclick");
+    lightboxText.textContent = currentText;
+}
+
+function lightboxControl(event) {
+    const target = event.currentTarget;
+    const lightbox = document.querySelector(".lightbox");
+    const worksNodes = document.querySelectorAll(".photograph-work>article");
+    // Converti la nodelist en array, le call appelle la nodelist en tant que 'this' dans la méthode et array.prototype défini le type de 'this'
+    let works = Array.prototype.slice.call(worksNodes);
+    let lightboxKey = parseInt(lightbox.dataset.key);
+    let needLoad = false;
+
+    switch (target.className) {
+        case "next":
+            if (lightboxKey < works.length - 1) {
+                lightboxKey += 1;
+                needLoad = true;
+            }
+            break;
+        case "previous":
+            if (lightboxKey > 0) {
+                lightboxKey -= 1;
+                needLoad = true;
+            }
+            break;
+        case "close":
+            lightbox.classList.toggle('lightbox-show');
+            break;
+    
+        default:
+            break;
+    }
+
+    lightbox.dataset.key = lightboxKey;
+    needLoad ? loadLightbox() : undefined;
+}
+
 async function init() {
-    // Récupère les données des photographes pour ensuite les insérer dans index.html
+    // Récupère les données des photographes avant de charger le reste des fonctions
     const { photographers, media } = await getPhotographers();
 
     // Trouve le photographe en fonction du paramètre de la page
