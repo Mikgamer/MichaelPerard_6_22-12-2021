@@ -13,9 +13,11 @@ function lightbox(event) {
 
     lightbox.dataset.key = indexWork;
 
+    tabindexSet(-1);
     loadLightbox();
     
     lightbox.classList.toggle('lightbox-show');
+    lightbox.querySelector(".close").focus();
 }
 
 function loadLightbox() {
@@ -23,9 +25,9 @@ function loadLightbox() {
     const lightboxText = lightbox.querySelector("p");
     const works = getWorks();
     const currentWorkKey = lightbox.dataset.key;
-    const currentText = works[currentWorkKey].querySelector("p").textContent;
+    const currentText = works[currentWorkKey].querySelector("H2").textContent;
     const currentWork = works[currentWorkKey].querySelector(".thumb-img").cloneNode(true);
-    console.log(currentWork);
+
     if (currentWork.tagName.toLowerCase() === "video") {
         currentWork.setAttribute("controls","")
     }
@@ -70,6 +72,8 @@ function lightboxControl(event) {
             break;
         case "close":
             lightbox.classList.toggle('lightbox-show');
+            tabindexSet(0);
+            document.querySelectorAll(".thumb-img")[lightboxKey].focus();
             break;
     
         default:

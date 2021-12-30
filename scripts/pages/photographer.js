@@ -62,8 +62,11 @@ async function updateTotalLikes() {
 }
 
 function dropdown(event) {
+    event.preventDefault();
     const dropdown = event.currentTarget.parentNode;
     dropdown.classList.toggle('dropdown-open');
+    // Empêche le focus au click pour bien fermer la fenêtre et empêcher des conflits de styles
+    dropdown.blur();
 }
 
 function selectDropdownOption(event) {
@@ -83,6 +86,7 @@ function selectDropdownOption(event) {
     dropdown.classList.toggle('dropdown-open');
 
     orderWork();
+    dropdown.focus();
 }
 
 function orderWork() {

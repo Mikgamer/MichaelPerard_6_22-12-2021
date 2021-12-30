@@ -117,19 +117,19 @@ h2{
     background: white;
 }
 
-.dropdown-open{
+.dropdown-open, .dropdown:focus-within{
     border-radius: 5px 5px 0 0;
 }
 
-.dropdown-open .arrow{
+.dropdown-open .arrow, .dropdown:focus-within .arrow{
     transform: rotate(180deg);
 }
 
-.dropdown-open .dropdown-options{
+.dropdown-open .dropdown-options, .dropdown:focus-within .dropdown-options{
     display: block;
 }
 
-.dropdown-open .dropdown-hide{
+.dropdown-open .dropdown-hide, .dropdown:focus-within .dropdown-hide{
     display: none;
 }
 

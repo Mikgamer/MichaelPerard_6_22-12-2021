@@ -9,17 +9,21 @@ function photographerWorkFactory(data) {
 
         if( image != undefined ) {
             media = document.createElement( 'img' );
-            media.setAttribute("src", picture);
-            media.setAttribute("alt", `${title}`);
+            media.src = picture;
+            media.alt = title;
             media.setAttribute("loading", "lazy");
             media.setAttribute("onclick", "lightbox(event)");
+            media.setAttribute("onkeydown", "event.key==='Enter'?lightbox(event):undefined");
+            media.setAttribute("tabindex", 0);
             media.dataset.date = date;
             media.className = 'thumb-img';
         } else if( video != undefined ) {
             media = document.createElement( 'video' );
             media.className = 'thumb-img';
-            media.setAttribute("src", videoMedia);
+            media.src = videoMedia;
             media.setAttribute("onclick", "lightbox(event)");
+            media.setAttribute("onkeydown", "event.key==='Enter'?lightbox(event):undefined");
+            media.setAttribute("tabindex", 0);
             media.dataset.date = date;
         }
 
@@ -44,8 +48,8 @@ function photographerWorkFactory(data) {
         numberLikes.textContent = likes;
         
         const imgLikes = document.createElement( 'img' );
-        imgLikes.setAttribute("src", 'assets/icons/heart.svg');
-        imgLikes.setAttribute("alt", `likes`);
+        imgLikes.src = 'assets/icons/heart.svg';
+        imgLikes.alt = 'likes';
 
         divLikes.appendChild(numberLikes);
         divLikes.appendChild(imgLikes);

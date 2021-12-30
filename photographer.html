@@ -10,23 +10,34 @@
   </head>
   <body>
     <header>
-      <a href="/index.html">
-        <img src="assets/images/logo.png" class="logo" alt=""/>
+      <a href="/index.html" tabindex="0">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
 
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" tabindex="0">Contactez-moi</button>
       </div>
       
       <label class="dropdown-label">Trier par</label>
-      <div data-value="popularity" class="dropdown">
-        <span onclick="dropdown(event)">Popularité</span> <img src="assets/icons/arrow.svg" alt="" class="arrow">
+      <div data-value="popularity" class="dropdown" tabindex="0">
+        <span onclick="dropdown(event)">Popularité</span>
+        <img src="assets/icons/arrow.svg" alt="" class="arrow">
         <ul class="dropdown-options">
-          <li onclick="selectDropdownOption(event)" class="dropdown-hide" data-value="popularity">Popularité</li>
-          <li onclick="selectDropdownOption(event)" data-value="date">Date</li>
-          <li onclick="selectDropdownOption(event)" data-value="title">Titre</li>
+          <li onclick="selectDropdownOption(event)" 
+              onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
+              class="dropdown-hide" 
+              data-value="popularity" 
+              tabindex="0">Popularité</li>
+          <li onclick="selectDropdownOption(event)" 
+              onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
+              data-value="date" 
+              tabindex="0">Date</li>
+          <li onclick="selectDropdownOption(event)" 
+              onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
+              data-value="title" 
+              tabindex="0">Titre</li>
         </ul>
       </div>
 
@@ -44,9 +55,15 @@
     <div class="lightbox">
       <p></p>
       <nav>
-        <img src="assets/icons/lightboxArrow.svg" onclick="lightboxControl(event)" alt="" class="previous">
-        <img src="assets/icons/lightboxArrow.svg" onclick="lightboxControl(event)" alt="" class="next">
-        <img src="assets/icons/lightboxClose.svg" onclick="lightboxControl(event)" alt="" class="close">
+        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="2" class="previous"
+              onclick="lightboxControl(event)" 
+              onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
+        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="3" class="next"
+              onclick="lightboxControl(event)"
+              onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
+        <img src="assets/icons/lightboxClose.svg" alt="" tabindex="1" class="close"
+              onclick="lightboxControl(event)"
+              onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
       </nav>
     </div>
 
@@ -54,7 +71,9 @@
 			<div class="modal">
 				<header>
           <h1>Contactez-moi</h1>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt=""/>
+          <img src="assets/icons/close.svg" alt="" tabindex="0"
+          onclick="closeModal()" 
+          onkeydown="event.key==='Enter'?closeModal():undefined" />
           <h2></h2>
         </header>
 				<form onsubmit="return sendForm(event)">
@@ -75,8 +94,9 @@
     
     <script src="scripts/factories/Photographer.js"></script>
     <script src="scripts/factories/PhotographerWork.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-    <script src="/scripts/utils/lightbox.js"></script>
+    <script src="scripts/utils/tabindexSet.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
     <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>

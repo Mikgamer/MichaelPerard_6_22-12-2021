@@ -9,6 +9,7 @@ function photographerFactory(data) {
 
         const linkUser = document.createElement( 'a' );
         linkUser.href = `/photographer.html?photographer=${id}`;
+        linkUser.ariaLabel = name;
 
         const img = getUserPictureDOM();
 

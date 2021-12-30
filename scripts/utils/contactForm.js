@@ -1,11 +1,16 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.classList.toggle("modal-show");
+    tabindexSet(-1);
+	modal.classList.add("modal-show");
+    modal.querySelector("img").focus();
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
-	modal.classList.toggle("modal-show");
+    tabindexSet(0);
+	modal.classList.remove("modal-show");
+    setTimeout( () => document.querySelector("main .contact_button").focus() , 50);
+    
 }
 
 function getPhotographerId() {
