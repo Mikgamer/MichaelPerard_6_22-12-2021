@@ -27,6 +27,7 @@ function sendForm(event) {
     const email = document.getElementById("email").textContent;
     const yourMessage = document.getElementById("yourMessage").textContent;
     const data = {firstName, lastName, email, yourMessage};
+    console.log(data);
     // Envoyer 'data' à l'email du photographe avec l'id de getPhotographerId()
 
     closeModal();

@@ -10,33 +10,36 @@
   </head>
   <body>
     <header>
-      <a href="/index.html" tabindex="0">
+      <a href="/index.html" tabindex="0" aria-label="Fisheye Home page">
         <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
       </a>
     </header>
 
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()" tabindex="0">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" tabindex="0" aria-label="Contact Me" role="button">Contactez-moi</button>
       </div>
       
       <label class="dropdown-label">Trier par</label>
-      <div data-value="popularity" class="dropdown" tabindex="0">
-        <span onclick="dropdown(event)">Popularité</span>
+      <div data-value="popularity" class="dropdown" aria-label="Order By"> 
+        <button onclick="dropdown(event)" tabindex="0" role="button" aria-haspopup="listbox">Popularité</button>
         <img src="assets/icons/arrow.svg" alt="" class="arrow">
-        <ul class="dropdown-options">
+        <ul class="dropdown-options" role="listbox">
           <li onclick="selectDropdownOption(event)" 
               onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
               class="dropdown-hide" 
               data-value="popularity" 
+              role="option"
               tabindex="0">Popularité</li>
           <li onclick="selectDropdownOption(event)" 
               onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
               data-value="date" 
+              role="option"
               tabindex="0">Date</li>
           <li onclick="selectDropdownOption(event)" 
               onkeydown="event.key==='Enter'?selectDropdownOption(event):undefined" 
               data-value="title" 
+              role="option"
               tabindex="0">Titre</li>
         </ul>
       </div>
@@ -55,13 +58,13 @@
     <div class="lightbox">
       <p></p>
       <nav>
-        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="2" class="previous"
+        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="2" class="previous" aria-label="Previous image" role="link"
               onclick="lightboxControl(event)" 
               onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
-        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="3" class="next"
+        <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="3" class="next" aria-label="Next image" role="link"
               onclick="lightboxControl(event)"
               onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
-        <img src="assets/icons/lightboxClose.svg" alt="" tabindex="1" class="close"
+        <img src="assets/icons/lightboxClose.svg" alt="" tabindex="1" class="close" aria-label="Close dialog" role="button"
               onclick="lightboxControl(event)"
               onkeydown="event.key==='Enter'?lightboxControl(event):undefined">
       </nav>
@@ -71,7 +74,7 @@
 			<div class="modal">
 				<header>
           <h1>Contactez-moi</h1>
-          <img src="assets/icons/close.svg" alt="" tabindex="0"
+          <img src="assets/icons/close.svg" alt="" tabindex="0" role="button"
           onclick="closeModal()" 
           onkeydown="event.key==='Enter'?closeModal():undefined" />
           <h2></h2>
@@ -79,15 +82,15 @@
 				<form onsubmit="return sendForm(event)">
 					<div>
 						<label for="firstName">Prénom</label>
-						<input type="text" name="firstName" id="firstName"/>
+						<input type="text" name="firstName" id="firstName" role="textbox"/>
 						<label for="lastName">Nom</label>
-						<input type="text" name="lastName" id="lastName"/>
+						<input type="text" name="lastName" id="lastName" role="textbox"/>
 						<label for="email">Email</label>
-						<input type="email" name="email" id="email"/>
+						<input type="email" name="email" id="email" role="textbox"/>
 						<label for="yourMessage">Votre message</label>
-						<textarea name="yourMessage" id="yourMessage"></textarea>
+						<textarea name="yourMessage" id="yourMessage" role="textbox"></textarea>
 					</div>
-          <button class="contact_button" type="submit">Envoyer</button>
+          <button class="contact_button" type="submit" role="button">Envoyer</button>
 				</form>
 			</div>
 		</div>

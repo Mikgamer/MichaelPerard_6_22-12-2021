@@ -10,7 +10,8 @@ function photographerFactory(data) {
         const linkUser = document.createElement( 'a' );
         linkUser.href = `/photographer.html?photographer=${id}`;
         linkUser.ariaLabel = name;
-
+        linkUser.setAttribute("role","link");
+        
         const img = getUserPictureDOM();
 
         const h2 = document.createElement( 'h2' );
@@ -36,35 +37,36 @@ function photographerFactory(data) {
         return (article);
     }
 
-    function getUserProfileDOM() {
-        const div = document.createElement( 'div' );
-        div.className = 'photographer-profile';
+    function getUserProfilDOM() {
+        const profil = document.createElement( 'div' );
+        profil.className = 'photographer-profile';
 
         const h1 = document.createElement( 'h1' );
         h1.textContent = name;
 
         const location = document.createElement( 'h2' );
         location.textContent = `${city}, ${country}`;
-
         const tag = document.createElement( 'p' );
         tag.textContent = tagline;
 
-        div.appendChild(h1);
-        div.appendChild(location);
-        div.appendChild(tag);
-
-        return (div);
+        
+        profil.appendChild(h1);
+        profil.appendChild(location);
+        profil.appendChild(tag);
+        
+        return (profil);
     }
 
     function getUserPictureDOM() {
         const img = document.createElement( 'img' );
         img.setAttribute("src", picture);
-        img.setAttribute("alt", `Image du photographe ${name}`);
+        img.setAttribute("alt", name);
         img.setAttribute("loading", "lazy");
+        img.setAttribute("role","img");
         img.className = 'user';
         
         return (img);
     }
     
-    return { getUserCardDOM, getUserProfileDOM, getUserPictureDOM, price }
+    return { getUserCardDOM, getUserProfilDOM, getUserPictureDOM, price }
 }

@@ -42,6 +42,7 @@ function photographerWorkFactory(data) {
         const divLikes = document.createElement( 'div' );
         divLikes.setAttribute("onclick", 'like(event)');
         divLikes.className = 'likes';
+        divLikes.ariaLabel = 'likes';
 
         const numberLikes = document.createElement( 'span' );
         numberLikes.className = 'number-likes';

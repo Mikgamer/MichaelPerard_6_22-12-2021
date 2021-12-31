@@ -27,9 +27,10 @@ function loadLightbox() {
     const currentWorkKey = lightbox.dataset.key;
     const currentText = works[currentWorkKey].querySelector("H2").textContent;
     const currentWork = works[currentWorkKey].querySelector(".thumb-img").cloneNode(true);
+    currentWork.setAttribute("tabindex","4");
 
     if (currentWork.tagName.toLowerCase() === "video") {
-        currentWork.setAttribute("controls","")
+        currentWork.setAttribute("controls","");
     }
 
     if (currentWorkKey < 1) {

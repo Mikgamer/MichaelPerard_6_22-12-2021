@@ -11,7 +11,7 @@ async function displayPhotographerData(photographer) {
 
 
     const photographerModel = photographerFactory(photographer);
-    const userProfile = photographerModel.getUserProfileDOM();
+    const userProfile = photographerModel.getUserProfilDOM();
     const userPicture = photographerModel.getUserPictureDOM();
     const userPrice = document.createTextNode(photographerModel.price);
 
@@ -62,11 +62,16 @@ async function updateTotalLikes() {
 }
 
 function dropdown(event) {
-    event.preventDefault();
-    const dropdown = event.currentTarget.parentNode;
+    const button = event.currentTarget;
+    const dropdown = button.parentNode;
     dropdown.classList.toggle('dropdown-open');
-    // Empêche le focus au click pour bien fermer la fenêtre et empêcher des conflits de styles
-    dropdown.blur();
+    if (dropdown.classList.contains('dropdown-open')) {
+        button.setAttribute('aria-expanded', true);
+    } else {
+        button.setAttribute('aria-expanded', false);
+    }
+    
+    setTimeout( () => button.focus() , 50);
 }
 
 function selectDropdownOption(event) {
@@ -82,11 +87,12 @@ function selectDropdownOption(event) {
     target.classList.add("dropdown-hide");
 
     dropdown.dataset.value = option;
-    dropdown.querySelector('span').textContent = dropdown.querySelector(`[data-value=${option}]`).textContent;
+    dropdown.querySelector('button').textContent = dropdown.querySelector(`[data-value=${option}]`).textContent;
     dropdown.classList.toggle('dropdown-open');
 
     orderWork();
-    dropdown.focus();
+    setTimeout( () => dropdown.querySelector('button').focus() , 50);
+    
 }
 
 function orderWork() {
