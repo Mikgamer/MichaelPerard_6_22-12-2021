@@ -22,9 +22,11 @@ function photographerWorkFactory(data) {
             media = document.createElement( 'video' );
             media.className = 'thumb-img';
             media.src = videoMedia;
+            media.title = title;
             media.setAttribute("onclick", "lightbox(event)");
             media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
             media.setAttribute("tabindex", 0);
+            media.setAttribute("preload", "metadata");
             media.setAttribute("aria-haspopup", "dialog");
             media.dataset.date = date;
         }

@@ -76,19 +76,26 @@ function dropdown(event) {
 
 function selectDropdownOption(event) {
     const target = event.currentTarget;
-
     const option = target.dataset.value;
+    const dropdownList = target.parentNode;
     const dropdown = target.parentNode.parentNode;
-    let optionsHidden = dropdown.getElementsByClassName("dropdown-hide")
 
-    for (let i = 0; i < optionsHidden.length; i++) {
-        optionsHidden[i].classList.remove("dropdown-hide");
-    }
+    dropdown.querySelector(".dropdown-hide").classList.remove("dropdown-hide");
+    target.classList.setAttribute("aria-selected","false");
+    
     target.classList.add("dropdown-hide");
+    target.classList.setAttribute("aria-selected","true");
 
     dropdown.dataset.value = option;
     dropdown.querySelector('button').textContent = dropdown.querySelector(`[data-value=${option}]`).textContent;
+
     dropdown.classList.toggle('dropdown-open');
+    if (dropdown.classList.contains('dropdown-open')) {
+        button.setAttribute('aria-expanded', true);
+    } else {
+        button.setAttribute('aria-expanded', false);
+    }
+    dropdownList.setAttribute("aria-activedescendant",target.id);
 
     orderWork();
     setTimeout( () => dropdown.querySelector('button').focus() , 50);

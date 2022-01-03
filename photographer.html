@@ -24,22 +24,26 @@
       <div data-value="popularity" class="dropdown" aria-label="Order By"> 
         <button onclick="dropdown(event)" tabindex="0" aria-haspopup="listbox" id="dropdownButton">Popularité</button>
         <img src="assets/icons/arrow.svg" alt="" class="arrow">
-        <ul class="dropdown-options" role="listbox" aria-labelledby="dropdownButton">
+        <ul class="dropdown-options" role="listbox" aria-labelledby="dropdownButton" aria-activedescendant="popularityDropdown">
           <li onclick="selectDropdownOption(event)" 
               onkeydown="handleKeyDown(event)?selectDropdownOption(event):undefined" 
               class="dropdown-hide" 
               data-value="popularity" 
               role="option"
+              id="popularityDropdown"
+              aria-selected="true"
               tabindex="0">Popularité</li>
           <li onclick="selectDropdownOption(event)" 
               onkeydown="handleKeyDown(event)?selectDropdownOption(event):undefined" 
               data-value="date" 
               role="option"
+              id="dateDropdown"
               tabindex="0">Date</li>
           <li onclick="selectDropdownOption(event)" 
               onkeydown="handleKeyDown(event)?selectDropdownOption(event):undefined" 
               data-value="title" 
               role="option"
+              id="titleDropdown"
               tabindex="0">Titre</li>
         </ul>
       </div>
@@ -64,10 +68,10 @@
         <img src="assets/icons/lightboxArrow.svg" alt="" tabindex="3" class="next" aria-label="Next image" role="link"
               onclick="lightboxControl(event)"
               onkeydown="handleKeyDown(event)?lightboxControl(event):undefined">
-        <img src="assets/icons/lightboxClose.svg" alt="" tabindex="1" class="close" aria-label="Close dialog" role="button"
-              onclick="lightboxControl(event)"
-              onkeydown="handleKeyDown(event)?lightboxControl(event):undefined">
       </nav>
+      <img src="assets/icons/lightboxClose.svg" alt="" tabindex="1" class="close" aria-label="Close dialog" role="button"
+            onclick="lightboxControl(event)"
+            onkeydown="handleKeyDown(event)?lightboxControl(event):undefined">
     </div>
 
     <div id="contact_modal" role="dialog" aria-labelledby="contactMe">
