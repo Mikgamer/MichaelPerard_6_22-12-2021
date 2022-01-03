@@ -13,8 +13,9 @@ function photographerWorkFactory(data) {
             media.alt = title;
             media.setAttribute("loading", "lazy");
             media.setAttribute("onclick", "lightbox(event)");
-            media.setAttribute("onkeydown", "event.key==='Enter'?lightbox(event):undefined");
+            media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
             media.setAttribute("tabindex", 0);
+            media.setAttribute("aria-haspopup", "dialog");
             media.dataset.date = date;
             media.className = 'thumb-img';
         } else if( video != undefined ) {
@@ -22,8 +23,9 @@ function photographerWorkFactory(data) {
             media.className = 'thumb-img';
             media.src = videoMedia;
             media.setAttribute("onclick", "lightbox(event)");
-            media.setAttribute("onkeydown", "event.key==='Enter'?lightbox(event):undefined");
+            media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
             media.setAttribute("tabindex", 0);
+            media.setAttribute("aria-haspopup", "dialog");
             media.dataset.date = date;
         }
 
@@ -31,16 +33,19 @@ function photographerWorkFactory(data) {
     }
 
     function getUserWorkDOM() {
-        const article = document.createElement( 'article' );
-        article.className = 'thumb-imgfull';
+        const figure = document.createElement( 'figure' );
+        figure.className = 'thumb-imgfull';
         
         var media = getMediaDOM();
+
+        const figcaption = document.createElement( 'figcaption' );
 
         const text = document.createElement( 'h2' );
         text.textContent = title;
 
         const divLikes = document.createElement( 'div' );
         divLikes.setAttribute("onclick", 'like(event)');
+        divLikes.setAttribute("role", "button");
         divLikes.className = 'likes';
         divLikes.ariaLabel = 'likes';
 
@@ -55,11 +60,13 @@ function photographerWorkFactory(data) {
         divLikes.appendChild(numberLikes);
         divLikes.appendChild(imgLikes);
 
-        article.appendChild(media);
-        article.appendChild(text);
-        article.appendChild(divLikes);
+        figcaption.appendChild(text);
+        figcaption.appendChild(divLikes);
 
-        return article;
+        figure.appendChild(media);
+        figure.appendChild(figcaption);
+
+        return figure;
     }
 
     return { getUserWorkDOM }

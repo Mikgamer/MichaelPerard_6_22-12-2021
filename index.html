@@ -11,7 +11,7 @@
 
   <body>
     <header>
-        <a href="/index.html" aria-label="Fisheye Home page" role="link">
+        <a href="/index.html" aria-label="Fisheye Home page" onkeydown="openlink(event)">
           <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
         </a>
         <h1>Nos photographes</h1>
@@ -25,5 +25,6 @@
 
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/index.js"></script>
+    <script src="scripts/utils/handleKeyDown.js"></script>
   </body>
 </html>

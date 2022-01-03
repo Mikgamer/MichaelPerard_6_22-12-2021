@@ -149,7 +149,8 @@ async function init() {
     const photographer = photographers.find( photographe => photographe.id == getPhotographerId() );
 
     // Affiche le nom du photographe dans la page contact
-    document.querySelector(".modal header>h2:last-of-type").textContent = photographer.name;
+    document.querySelector(".modal header>h2").textContent = photographer.name;
+    document.querySelector(".modal header>h1").setAttribute("arial-label",`Contact me ${photographer.name}`)
 
     displayPhotographerData(photographer);
     displayWorkData(media);

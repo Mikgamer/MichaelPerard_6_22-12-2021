@@ -8,9 +8,9 @@ function photographerFactory(data) {
         article.className = 'thumb-photographer';
 
         const linkUser = document.createElement( 'a' );
-        linkUser.href = `/photographer.html?photographer=${id}`;
+        linkUser.href = `photographer.html?photographer=${id}`;
         linkUser.ariaLabel = name;
-        linkUser.setAttribute("role","link");
+        linkUser.setAttribute("onkeydown","openlink(event)");
         
         const img = getUserPictureDOM();
 
@@ -62,7 +62,6 @@ function photographerFactory(data) {
         img.setAttribute("src", picture);
         img.setAttribute("alt", name);
         img.setAttribute("loading", "lazy");
-        img.setAttribute("role","img");
         img.className = 'user';
         
         return (img);

@@ -1,8 +1,19 @@
+let IsFormContactKeyListenerActive = false;
+document.addEventListener( 'keydown',
+    function (event) {
+        if (event.key === "Escape") {
+            IsFormContactKeyListenerActive ? closeModal() : undefined;
+        }
+    }
+);
+
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     tabindexSet(-1);
 	modal.classList.add("modal-show");
     modal.querySelector("img").focus();
+
+    IsFormContactKeyListenerActive = true;
 }
 
 function closeModal() {
@@ -10,7 +21,7 @@ function closeModal() {
     tabindexSet(0);
 	modal.classList.remove("modal-show");
     setTimeout( () => document.querySelector("main .contact_button").focus() , 50);
-    
+    IsFormContactKeyListenerActive = false;
 }
 
 function getPhotographerId() {
@@ -19,15 +30,28 @@ function getPhotographerId() {
     return params.photographer;
 }
 
+function getFormData() {
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let yourMessage = document.getElementById("yourMessage").value;
+    let data = {firstName, lastName, email, yourMessage};
+    resetFormData();
+
+    return data;
+}
+
+function resetFormData() {
+    document.getElementById("firstName").value   =
+    document.getElementById("lastName").value    =
+    document.getElementById("email").value       =
+    document.getElementById("yourMessage").value = '';
+}
+
 function sendForm(event) {
     event.preventDefault();
 
-    const firstName = document.getElementById("firstName").textContent;
-    const lastName = document.getElementById("lastName").textContent;
-    const email = document.getElementById("email").textContent;
-    const yourMessage = document.getElementById("yourMessage").textContent;
-    const data = {firstName, lastName, email, yourMessage};
-    console.log(data);
+    console.log(getFormData());
     // Envoyer 'data' à l'email du photographe avec l'id de getPhotographerId()
 
     closeModal();

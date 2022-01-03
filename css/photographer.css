@@ -154,16 +154,16 @@ h2{
 .photograph-work{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: 300px;
     justify-content: space-between;
     gap: 95px;
     margin: 30px 100px;
 }
 
 .thumb-imgfull {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-width: 0;
 }
 
 .thumb-imgfull .thumb-img{
@@ -174,11 +174,20 @@ h2{
     object-fit: cover;
     border-radius: 5px;
     width: 100%;
-    height: 100%;
+    height: 300px;
+}
+
+.thumb-imgfull figcaption{
+  display: flex;
+  justify-content: space-between;
+  gap: 15px
 }
 
 .thumb-imgfull h2{
     margin: 10px 0 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* Like images */
@@ -189,10 +198,20 @@ h2{
     cursor: pointer;
 }
 
+.likes[liked] {
+  cursor: default;
+}
+
 .likes img {
     height: 18px;
     width: 18px;
     object-fit: contain;
+    transition: .2s;
+}
+
+.likes[liked] img{
+  transform: scale(1.4);
+  filter: drop-shadow(0 4px 1px rgb(0 0 0/.2));
 }
 
 .number-likes{
@@ -387,3 +406,16 @@ form textarea {
   resize: none;
 }
 
+/* Hover/focus */
+
+.contact_button:hover, .contact_button:focus,
+.dropdown:hover, .dropdown:focus-within,
+.dropdown:hover .dropdown-options, .dropdown:focus-within .dropdown-options {
+  background: #DB8876;
+  color: black;
+}
+
+.dropdown:hover img, .dropdown:focus-within img,
+.dropdown:hover li::after, .dropdown:focus-within li::after {
+  filter: brightness(0);
+}
