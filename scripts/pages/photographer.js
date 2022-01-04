@@ -79,12 +79,16 @@ function selectDropdownOption(event) {
     const option = target.dataset.value;
     const dropdownList = target.parentNode;
     const dropdown = target.parentNode.parentNode;
+    const button = dropdown.querySelector("button");
 
-    dropdown.querySelector(".dropdown-hide").classList.remove("dropdown-hide");
-    target.classList.setAttribute("aria-selected","false");
+    const currentDropdown = dropdown.querySelectorAll(".dropdown-hide");
+    for (let i = 0; i < currentDropdown.length; i++) {
+        currentDropdown[i].classList.remove("dropdown-hide");
+        currentDropdown[i].setAttribute("aria-selected","false");
+    }
     
     target.classList.add("dropdown-hide");
-    target.classList.setAttribute("aria-selected","true");
+    target.setAttribute("aria-selected","true");
 
     dropdown.dataset.value = option;
     dropdown.querySelector('button').textContent = dropdown.querySelector(`[data-value=${option}]`).textContent;

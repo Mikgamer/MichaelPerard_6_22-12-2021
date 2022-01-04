@@ -37,6 +37,8 @@ function loadLightbox() {
     const currentText = works[currentWorkKey].querySelector("h2").textContent;
     const currentWork = works[currentWorkKey].querySelector(".thumb-img").cloneNode(true);
     currentWork.setAttribute("tabindex","4");
+    currentWork.removeAttribute("onkeydown");
+    currentWork.removeAttribute("aria-haspopup");
 
     if (currentWork.tagName.toLowerCase() === "video") {
         currentWork.setAttribute("controls","");

@@ -1,35 +1,31 @@
 function photographerWorkFactory(data) {
     
-    const { id, photographerId, title, image, video, likes, date, price } = data;
+    const { title, image, video, likes, date, altText } = data;
     const picture = `assets/images/${image}`;
     const videoMedia = `assets/images/${video}`;
 
     function getMediaDOM() {
-        var media = "";
+        var media = undefined;
 
         if( image != undefined ) {
             media = document.createElement( 'img' );
             media.src = picture;
             media.alt = title;
             media.setAttribute("loading", "lazy");
-            media.setAttribute("onclick", "lightbox(event)");
-            media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
-            media.setAttribute("tabindex", 0);
-            media.setAttribute("aria-haspopup", "dialog");
-            media.dataset.date = date;
-            media.className = 'thumb-img';
         } else if( video != undefined ) {
             media = document.createElement( 'video' );
-            media.className = 'thumb-img';
             media.src = videoMedia;
             media.title = title;
-            media.setAttribute("onclick", "lightbox(event)");
-            media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
-            media.setAttribute("tabindex", 0);
             media.setAttribute("preload", "metadata");
-            media.setAttribute("aria-haspopup", "dialog");
-            media.dataset.date = date;
         }
+
+        media.setAttribute("onclick", "lightbox(event)");
+        media.setAttribute("onkeydown", "handleKeyDown(event)?lightbox(event):undefined");
+        media.setAttribute("aria-haspopup", "dialog");
+        media.setAttribute("aria-label", altText);
+        media.setAttribute("tabindex", 0);
+        media.dataset.date = date;
+        media.className = 'thumb-img';
 
         return media
     }
